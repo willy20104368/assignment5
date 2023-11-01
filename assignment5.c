@@ -2,27 +2,26 @@
 #include <time.h>
 #include <stdlib.h>
 
-int f1(int val)
+int f1(int *val)
 {
     int num = 0;
     int *ptr = &num;
     if (num == 0)
     { 
         /* text had val == 0, but val is not in scope */
-        int val;
-        val = 5;
-        ptr = &val;
+        ptr = val;
     }
 
-    return(*ptr + 1);
+    return ptr;
 }
+
 
 int main()
 {
     int val = 5;
-    int result;
-    result = f1(val);
-    printf("result = %d \n", result);
+    int *result;
+    result = f1(&val);
+    printf("Value %d is at %x\n", *result, result);
 
     return 0;
 }
